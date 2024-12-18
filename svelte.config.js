@@ -6,7 +6,10 @@ import { fastDimension } from 'svelte-fast-dimension';
 const config = {
 	preprocess: [vitePreprocess(), fastDimension()],
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		alias: {
+			$lib: 'src/lib'
+		}
 	},
 	typescript: {
 		config(config) {

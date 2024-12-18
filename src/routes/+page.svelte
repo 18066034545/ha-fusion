@@ -240,6 +240,11 @@
 			<svelte:component this={CustomJs.default} />
 		{/await}
 	{/if}
+
+	<!-- fullscreen button -->
+	{#await import('$lib/Main/FullscreenButton.svelte') then FullscreenButton}
+		<svelte:component this={FullscreenButton.default} />
+	{/await}
 </div>
 
 <style>
