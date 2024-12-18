@@ -27,149 +27,63 @@ export const defaultTemplate: DefaultTemplate = {
       sections: [
         {
           id: 101,
-          name: '照明',
+          name: '照明控制',
+          icon: 'mdi:ceiling-light',
           items: []
         },
         {
           id: 102,
-          name: '空调',
+          name: '空调控制',
+          icon: 'mdi:air-conditioner',
           items: []
         },
         {
           id: 103,
-          name: '电视',
+          name: '电视控制',
+          icon: 'mdi:television',
           items: []
         },
         {
           id: 104,
-          name: '其他',
+          name: '窗帘控制',
+          icon: 'mdi:curtains',
+          items: []
+        },
+        {
+          id: 105,
+          name: '传感器',
+          icon: 'mdi:thermometer',
           items: []
         }
       ]
     },
     {
       id: 2,
-      name: '主卧',
+      name: '主卧室',
       icon: 'mdi:bed-double',
       sections: [
         {
           id: 201,
-          name: '照明',
+          name: '照明控制',
+          icon: 'mdi:ceiling-light',
           items: []
         },
         {
           id: 202,
-          name: '空调',
+          name: '空调控制',
+          icon: 'mdi:air-conditioner',
           items: []
         },
         {
           id: 203,
-          name: '其他',
-          items: []
-        }
-      ]
-    },
-    {
-      id: 3,
-      name: '次卧',
-      icon: 'mdi:bed',
-      sections: [
-        {
-          id: 301,
-          name: '照明',
+          name: '窗帘控制',
+          icon: 'mdi:curtains',
           items: []
         },
         {
-          id: 302,
-          name: '空调',
-          items: []
-        },
-        {
-          id: 303,
-          name: '其他',
-          items: []
-        }
-      ]
-    },
-    {
-      id: 4,
-      name: '儿童房',
-      icon: 'mdi:baby',
-      sections: [
-        {
-          id: 401,
-          name: '照明',
-          items: []
-        },
-        {
-          id: 402,
-          name: '空调',
-          items: []
-        },
-        {
-          id: 403,
-          name: '其他',
-          items: []
-        }
-      ]
-    },
-    {
-      id: 5,
-      name: '厨房',
-      icon: 'mdi:stove',
-      sections: [
-        {
-          id: 501,
-          name: '照明',
-          items: []
-        },
-        {
-          id: 502,
-          name: '电器',
-          items: []
-        },
-        {
-          id: 503,
-          name: '其他',
-          items: []
-        }
-      ]
-    },
-    {
-      id: 6,
-      name: '卫生间',
-      icon: 'mdi:shower',
-      sections: [
-        {
-          id: 601,
-          name: '照明',
-          items: []
-        },
-        {
-          id: 602,
-          name: '热水器',
-          items: []
-        },
-        {
-          id: 603,
-          name: '其他',
-          items: []
-        }
-      ]
-    },
-    {
-      id: 7,
-      name: '阳台',
-      icon: 'mdi:window-open',
-      sections: [
-        {
-          id: 701,
-          name: '照明',
-          items: []
-        },
-        {
-          id: 702,
-          name: '其他',
+          id: 204,
+          name: '传感器',
+          icon: 'mdi:thermometer',
           items: []
         }
       ]

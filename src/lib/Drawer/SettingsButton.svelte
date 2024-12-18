@@ -51,9 +51,18 @@
 	async function handlePointer() {
 		await import('$lib/Settings/Index.svelte');
 	}
+
+	/**
+	 * 跳转到标准界面
+	 */
+	function goToStandardInterface() {
+		const currentUrl = window.location.href;
+		const baseUrl = currentUrl.split(':5050')[0];
+		window.location.href = `${baseUrl}:8123`;
+	}
 </script>
 
-<div class="settings-container">
+<div class="header-actions">
 	<button
 		class="button"
 		on:click={handleClick}
@@ -62,9 +71,8 @@
 		use:Ripple={$ripple}
 	>
 		<figure>
-			<Icon icon="clarity:settings-solid" height="none" />
+			<Icon icon="clarity:settings-solid" height="24" />
 		</figure>
-
 		<span>{$lang('settings')}</span>
 	</button>
 
@@ -74,24 +82,29 @@
 		use:Ripple={$ripple}
 	>
 		<figure>
-			<Icon icon="mdi:home-variant" height="none" />
+			<Icon icon="mdi:home-variant" height="24" />
 		</figure>
-
 		<span>应用模板</span>
 	</button>
 
-	<Separator />
-
-	{#await import('./InterfaceToggle.svelte') then InterfaceToggle}
-		<svelte:component this={InterfaceToggle.default} />
-	{/await}
+	<button
+		class="button"
+		on:click={goToStandardInterface}
+		use:Ripple={$ripple}
+	>
+		<figure>
+			<Icon icon="mdi:view-dashboard" height="24" />
+		</figure>
+		<span>标准界面</span>
+	</button>
 </div>
 
 <style>
-	.settings-container {
+	.header-actions {
 		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
+		align-items: center;
+		gap: 1rem;
+		padding: 0.5rem;
 	}
 
 	.button {
@@ -102,10 +115,10 @@
 		border: none;
 		color: white;
 		cursor: pointer;
-		padding: 0.5rem;
+		padding: 0.5rem 1rem;
 		border-radius: 0.25rem;
 		transition: all 0.3s ease;
-		width: 100%;
+		white-space: nowrap;
 	}
 
 	.button:hover {
@@ -115,5 +128,12 @@
 	figure {
 		display: flex;
 		margin: 0;
+	}
+
+	@media (max-width: 768px) {
+		.header-actions {
+			flex-direction: column;
+			align-items: stretch;
+		}
 	}
 </style>
