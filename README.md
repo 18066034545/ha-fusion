@@ -1,5 +1,7 @@
 # ha-fusion
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 A modern, easy-to-use and performant custom [Home Assistant](https://www.home-assistant.io/) dashboard
 
 <https://www.youtube.com/watch?v=D8mWruSuPOM>
