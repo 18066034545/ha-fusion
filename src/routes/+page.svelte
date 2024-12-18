@@ -199,23 +199,50 @@
 	style:grid-template-rows={$showDrawer ? 'auto auto 1fr' : '0fr auto 1fr'}
 	style:transition="grid-template-rows {$motion}ms ease, grid-template-columns {$motion}ms ease"
 >
-	<!-- nav -->
-	{#await import('$lib/Sidebar/Navigation.svelte') then Navigation}
-		<svelte:component this={Navigation.default} />
-	{/await}
-
-	<!-- main -->
-	{#if view?.sections}
-		{#await import('$lib/Main/Index.svelte') then Main}
-			<svelte:component this={Main.default} {view} {altKeyPressed} />
-		{/await}
-	{:else if $connection}
-		{#await import('$lib/Main/Intro.svelte') then Intro}
-			<svelte:component this={Intro.default} {data} />
+	<!-- header -->
+	{#if $showDrawer}
+		{#await import('$lib/Drawer/Index.svelte') then Drawer}
+			<svelte:component this={Drawer.default} {view} {data} {toggleDrawer} />
 		{/await}
 	{/if}
 
-	<!-- aside -->
+	<!-- sidebar -->
+	<div class="sidebar">
+		<!-- time and system info -->
+		<div class="time-section">
+			<div class="time">23:45</div>
+			<div class="date">星期三</div>
+			<div class="date">12月18日</div>
+			<div class="version">Vecka 51</div>
+		</div>
+
+		<!-- weather and stats -->
+		<div class="stats-section">
+			<div class="weather">Weather</div>
+			<div class="cpu">CPU: 0%</div>
+			<div class="ram">RAM: 0%</div>
+		</div>
+
+		<!-- navigation -->
+		{#await import('$lib/Sidebar/Navigation.svelte') then Navigation}
+			<svelte:component this={Navigation.default} />
+		{/await}
+	</div>
+
+	<!-- main content -->
+	<div class="main-content">
+		{#if view?.sections}
+			{#await import('$lib/Main/Index.svelte') then Main}
+				<svelte:component this={Main.default} {view} {altKeyPressed} />
+			{/await}
+		{:else if $connection}
+			{#await import('$lib/Main/Intro.svelte') then Intro}
+				<svelte:component this={Intro.default} {data} />
+			{/await}
+		{/if}
+	</div>
+
+	<!-- right sidebar -->
 	{#await import('$lib/Sidebar/Index.svelte') then Sidebar}
 		<svelte:component this={Sidebar.default} {altKeyPressed} />
 	{/await}
@@ -224,20 +251,6 @@
 	{#if !$disableMenuButton}
 		{#await import('$lib/Drawer/MenuButton.svelte') then MenuButton}
 			<svelte:component this={MenuButton.default} {handleClick} />
-		{/await}
-	{/if}
-
-	<!-- header -->
-	{#if $showDrawer}
-		{#await import('$lib/Drawer/Index.svelte') then Drawer}
-			<svelte:component this={Drawer.default} {view} {data} {toggleDrawer} />
-		{/await}
-	{/if}
-
-	<!-- module -->
-	{#if $customJs}
-		{#await import('$lib/Components/CustomJs.svelte') then CustomJs}
-			<svelte:component this={CustomJs.default} />
 		{/await}
 	{/if}
 
@@ -251,45 +264,54 @@
 	#layout {
 		display: grid;
 		grid-template-areas:
-			'header header'
-			'aside nav'
-			'aside main';
+			'header header header'
+			'sidebar main aside';
+		grid-template-columns: auto 1fr auto;
 		min-height: 100vh;
 		overflow: hidden;
 	}
 
-	.search-area {
-		height: 48px;
-		padding: 0 1rem;
+	.sidebar {
+		grid-area: sidebar;
 		display: flex;
-		align-items: center;
+		flex-direction: column;
+		background: rgba(0, 0, 0, 0.2);
+		width: 280px;
 	}
 
-	.search-input {
-		width: 100%;
-		height: 36px;
-		background: rgba(255, 255, 255, 0.1);
-		border: none;
-		border-radius: 4px;
-		color: white;
-		padding: 0 1rem;
+	.time-section {
+		padding: 1rem;
 	}
 
-	.search-input::placeholder {
-		color: rgba(255, 255, 255, 0.5);
+	.time {
+		font-size: 2rem;
+		font-weight: bold;
+	}
+
+	.date, .version {
+		opacity: 0.8;
+	}
+
+	.stats-section {
+		padding: 1rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.main-content {
+		grid-area: main;
 	}
 
 	@media (max-width: 768px) {
 		#layout {
-			display: grid;
 			grid-template-areas:
-				'header header'
-				'aside aside'
-				'nav nav'
-				'main main';
-			min-height: 100vh;
-			overflow: hidden;
-			grid-template-rows: auto auto auto 1fr !important;
+				'header header header'
+				'sidebar sidebar sidebar'
+				'main main main';
+			grid-template-columns: 1fr;
+		}
+
+		.sidebar {
+			width: 100%;
 		}
 	}
 </style>

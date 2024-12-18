@@ -29,25 +29,6 @@
 </script>
 
 <div class="navigation">
-  <div class="nav-header">
-    <button 
-      class="nav-toggle" 
-      class:active={!showDeviceTypes}
-      on:click={() => showDeviceTypes = false}
-    >
-      <Icon icon="mdi:home" />
-      <span>房间</span>
-    </button>
-    <button 
-      class="nav-toggle" 
-      class:active={showDeviceTypes}
-      on:click={() => showDeviceTypes = true}
-    >
-      <Icon icon="mdi:apps" />
-      <span>设备类别</span>
-    </button>
-  </div>
-
   <div class="nav-content">
     {#if !showDeviceTypes}
       <!-- 房间列表 -->
@@ -74,6 +55,16 @@
       {/each}
     {/if}
   </div>
+
+  <div class="nav-footer">
+    <button 
+      class="nav-toggle" 
+      on:click={() => showDeviceTypes = !showDeviceTypes}
+    >
+      <Icon icon={showDeviceTypes ? "mdi:home" : "mdi:apps"} />
+      <span>{showDeviceTypes ? "房间" : "设备类别"}</span>
+    </button>
+  </div>
 </div>
 
 <style>
@@ -81,35 +72,6 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: rgba(0, 0, 0, 0.2);
-  }
-
-  .nav-header {
-    display: flex;
-    padding: 0.5rem;
-    gap: 0.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .nav-toggle {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.5rem;
-    background: none;
-    border: none;
-    color: white;
-    opacity: 0.7;
-    cursor: pointer;
-    border-radius: 0.25rem;
-    transition: all 0.3s ease;
-  }
-
-  .nav-toggle.active {
-    background: rgba(255, 255, 255, 0.1);
-    opacity: 1;
   }
 
   .nav-content {
@@ -141,6 +103,32 @@
 
   .nav-item.active {
     background: rgba(255, 255, 255, 0.15);
+    opacity: 1;
+  }
+
+  .nav-footer {
+    padding: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    color: white;
+    opacity: 0.7;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+  }
+
+  .nav-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
     opacity: 1;
   }
 
