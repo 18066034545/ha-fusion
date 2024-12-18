@@ -4,6 +4,7 @@
 	import Icon from '@iconify/svelte';
 	import Ripple from 'svelte-ripple';
 	import { base } from '$app/paths';
+	import Separator from './Separator.svelte';
 
 	export let data: any;
 
@@ -38,6 +39,13 @@
 	}
 
 	/**
+	 * Opens template selector modal
+	 */
+	function openTemplateSelector() {
+		openModal(() => import('$lib/Modal/TemplateSelector.svelte'));
+	}
+
+	/**
 	 * Preloads module before click event
 	 */
 	async function handlePointer() {
@@ -45,16 +53,67 @@
 	}
 </script>
 
-<button
-	class="button"
-	on:click={handleClick}
-	on:pointerenter={handlePointer}
-	on:pointerdown={handlePointer}
-	use:Ripple={$ripple}
->
-	<figure>
-		<Icon icon="clarity:settings-solid" height="none" />
-	</figure>
+<div class="settings-container">
+	<button
+		class="button"
+		on:click={handleClick}
+		on:pointerenter={handlePointer}
+		on:pointerdown={handlePointer}
+		use:Ripple={$ripple}
+	>
+		<figure>
+			<Icon icon="clarity:settings-solid" height="none" />
+		</figure>
 
-	<span>{$lang('settings')}</span>
-</button>
+		<span>{$lang('settings')}</span>
+	</button>
+
+	<button
+		class="button"
+		on:click={openTemplateSelector}
+		use:Ripple={$ripple}
+	>
+		<figure>
+			<Icon icon="mdi:home-variant" height="none" />
+		</figure>
+
+		<span>应用模板</span>
+	</button>
+
+	<Separator />
+
+	{#await import('./InterfaceToggle.svelte') then InterfaceToggle}
+		<svelte:component this={InterfaceToggle.default} />
+	{/await}
+</div>
+
+<style>
+	.settings-container {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.button {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		background: none;
+		border: none;
+		color: white;
+		cursor: pointer;
+		padding: 0.5rem;
+		border-radius: 0.25rem;
+		transition: all 0.3s ease;
+		width: 100%;
+	}
+
+	.button:hover {
+		background: rgba(255, 255, 255, 0.1);
+	}
+
+	figure {
+		display: flex;
+		margin: 0;
+	}
+</style>

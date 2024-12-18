@@ -21,11 +21,18 @@ export interface Addons {
 
 export interface Dashboard {
 	views: Views[];
-	sidebar: SidebarItem[];
-	theme?: string;
+	sidebar?: any[];
 	hide_views?: boolean;
 	hide_sidebar?: boolean;
 	sidebarWidth?: number;
+	theme?: {
+		colors: {
+			primary: string;
+			secondary: string;
+			background: string;
+			text: string;
+		}
+	};
 }
 
 export interface Views {
