@@ -12,7 +12,7 @@
 
 ---
 
-## 📣 版本说明
+## 📣 特色功能
 
 这是一个基于原版 ha-fusion 改进的版本，增加了以下特性：
 
@@ -62,27 +62,6 @@ docker-compose pull ha-fusion
 docker-compose up -d ha-fusion
 ```
 
-<details>
-<summary>
-   <b>其他安装方式</b>
-</summary>
-
-如果不使用 docker-compose，更新容器需要额外的步骤。每次更新时，都需要先停止当前容器，删除它，拉取新镜像，然后重新执行 docker run 命令。
-
-```bash
-docker run -d \
-  --name ha-fusion \
-  --network bridge \
-  -p 5050:5050 \
-  -v /path/to/ha-fusion:/app/data \
-  -e TZ=Asia/Shanghai \
-  -e HASS_URL=http://192.168.1.241:8123 \
-  --restart always \
-  ghcr.io/18066034545/ha-fusion
-```
-
-</details>
-
 ---
 
 ### Windows 11 下的 Docker 安装和部署
@@ -92,7 +71,7 @@ docker run -d \
    - 下载 Windows 版本的 Docker Desktop
    - 双击安装包进行安装
    - 安装完成后重启电脑
-   - 启动 Docker Desktop 并等待其完全启动（托盘图标变为运行状态）
+   - 启动 Docker Desktop 并等待其完全启动
 
 2. **创建项目目录**
    ```powershell
@@ -118,24 +97,23 @@ docker run -d \
          - ./data:/app/data
        environment:
          - TZ=Asia/Shanghai
-         - HASS_URL=http://192.168.2.12:8123
+         - HASS_URL=http://YOUR_HA_IP:8123
        restart: always
    ```
    
    > 提示：
-   > 1. 这里使用的是您的 Home Assistant 实际地址 `http://192.168.2.12:8123`
-   > 2. 请确保您的电脑能够访问这个地址（可以在浏览器中测试）
+   > 1. 这里使用您的 Home Assistant 实际地址
+   > 2. 请确保您的电脑能够访问这个地址
    > 3. 如果您的 Home Assistant 启用了 SSL，请使用 `https://` 开头
 
 4. **启动前检查**
    在启动容器前，请确保：
-   - 能够在浏览器中访问 `http://192.168.2.12:8123`
+   - 能够访问 Home Assistant
    - Docker Desktop 已经启动
-   - 5050 端口未被其他程序占用
+   - 5050 端口未被占用
 
 5. **启动容器**
    ```powershell
-   # 在 PowerShell 中执行以下命令
    cd C:\ha-fusion
    docker-compose up -d
    ```
@@ -176,8 +154,8 @@ ha-fusion 提供了多个预设的户型模板，帮助您快速配置智能家�
 
 1. **两室一厅**
    - 适合小家庭
-   - 包含客厅、主卧、次卧等基础空间
-   - 配备基础的智能控制功能
+   - 包含基础房间和功能
+   - 基础智能控制功能
 
 2. **三室两厅**
    - 适合中等家庭
@@ -200,7 +178,7 @@ ha-fusion 提供了多个预设的户型模板，帮助您快速配置智能家�
 
 ### URL 参数
 
-这些功能仅在插件配置中暴露端口或使用 Docker 时有效。注意：使用 Ingress 时，无法读取 URL 参数。
+这些功能仅在配置中暴露端口或使用 Docker 时有效。注意：使用 Ingress 时，无法读取 URL 参数。
 
 #### 视图
 
@@ -208,7 +186,7 @@ ha-fusion 提供了多个预设的户型模板，帮助您快速配置智能家�
 
 #### 菜单
 
-要禁用菜单按钮，在 URL 后添加查询字符串 `?menu=false`。这在您想避免仪表盘被意外更改时很有用，比如在壁挂式平板电脑上。
+要禁用菜单按钮，在 URL 后添加查询字符串 `?menu=false`。这在壁挂式平板电脑上特别有用。
 
 ---
 
