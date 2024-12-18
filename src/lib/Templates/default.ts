@@ -2,6 +2,10 @@ import type { Views } from '$lib/Types';
 
 interface DefaultTemplate {
   views: Views[];
+  sidebar: {
+    type: string;
+    items: { name: string; icon: string }[];
+  }[];
   theme: {
     colors: {
       primary: string;
@@ -29,30 +33,35 @@ export const defaultTemplate: DefaultTemplate = {
           id: 101,
           name: '照明控制',
           icon: 'mdi:ceiling-light',
+          type: 'lighting',
           items: []
         },
         {
           id: 102,
           name: '空调控制',
           icon: 'mdi:air-conditioner',
+          type: 'ac',
           items: []
         },
         {
           id: 103,
           name: '电视控制',
           icon: 'mdi:television',
+          type: 'media',
           items: []
         },
         {
           id: 104,
           name: '窗帘控制',
           icon: 'mdi:curtains',
+          type: 'curtain',
           items: []
         },
         {
           id: 105,
           name: '传感器',
           icon: 'mdi:thermometer',
+          type: 'sensor',
           items: []
         }
       ]
@@ -66,26 +75,39 @@ export const defaultTemplate: DefaultTemplate = {
           id: 201,
           name: '照明控制',
           icon: 'mdi:ceiling-light',
+          type: 'lighting',
           items: []
         },
         {
           id: 202,
           name: '空调控制',
           icon: 'mdi:air-conditioner',
+          type: 'ac',
           items: []
         },
         {
           id: 203,
           name: '窗帘控制',
           icon: 'mdi:curtains',
+          type: 'curtain',
           items: []
         },
         {
           id: 204,
           name: '传感器',
           icon: 'mdi:thermometer',
+          type: 'sensor',
           items: []
         }
+      ]
+    }
+  ],
+  sidebar: [
+    {
+      type: 'navigation',
+      items: [
+        { name: '房间导航', icon: 'mdi:home' },
+        { name: '设备类别', icon: 'mdi:apps' }
       ]
     }
   ],

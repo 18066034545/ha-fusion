@@ -36,7 +36,13 @@
         id: room.id,
         name: room.name,
         icon: room.icon,
-        sections: room.sections
+        sections: room.sections.map(section => ({
+          id: section.id,
+          name: section.name,
+          icon: section.icon,
+          type: section.type,
+          items: []
+        }))
       })),
       theme: selectedTemplate.theme,
       hide_views: selectedTemplate.settings.hide_views,
@@ -44,13 +50,19 @@
       sidebarWidth: selectedTemplate.settings.sidebarWidth
     };
 
+    // 更新状态
     $dashboard = updatedDashboard;
-
+    
     // 记录更改
     $record();
     
     // 关闭模态框
     closeModal();
+    
+    // 强制重新渲染
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   }
 
   function cancelConfirm(): void {

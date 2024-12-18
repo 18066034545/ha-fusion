@@ -200,8 +200,8 @@
 	style:transition="grid-template-rows {$motion}ms ease, grid-template-columns {$motion}ms ease"
 >
 	<!-- nav -->
-	{#await import('$lib/Main/Views.svelte') then Views}
-		<svelte:component this={Views.default} {view} />
+	{#await import('$lib/Sidebar/Navigation.svelte') then Navigation}
+		<svelte:component this={Navigation.default} />
 	{/await}
 
 	<!-- main -->
@@ -256,6 +256,27 @@
 			'aside main';
 		min-height: 100vh;
 		overflow: hidden;
+	}
+
+	.search-area {
+		height: 48px;
+		padding: 0 1rem;
+		display: flex;
+		align-items: center;
+	}
+
+	.search-input {
+		width: 100%;
+		height: 36px;
+		background: rgba(255, 255, 255, 0.1);
+		border: none;
+		border-radius: 4px;
+		color: white;
+		padding: 0 1rem;
+	}
+
+	.search-input::placeholder {
+		color: rgba(255, 255, 255, 0.5);
 	}
 
 	@media (max-width: 768px) {
