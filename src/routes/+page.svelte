@@ -22,6 +22,9 @@
 	import { browser } from '$app/environment';
 	import { modals } from 'svelte-modals';
 	import Theme from '$lib/Components/Theme.svelte';
+	import { interfaceMode } from '$lib/Stores';
+	import TemplateView from '$lib/Views/TemplateView.svelte';
+	import NativeView from '$lib/Views/NativeView.svelte';
 
 	/**
 	 * Data from server-side load
@@ -184,6 +187,12 @@
 			altKeyPressed = false;
 		}
 	}
+
+	let mounted = false;
+
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 <svelte:window on:keydown={handleKeydown} on:keyup={handleKeyup} />
@@ -191,127 +200,18 @@
 <!-- theme -->
 <Theme initial={data?.theme} />
 
-<div
-	id="layout"
-	style:grid-template-columns="{$dashboard?.hide_sidebar || !$dashboard?.sidebar?.length
-		? '0'
-		: $dashboard?.sidebarWidth || 350}px auto"
-	style:grid-template-rows={$showDrawer ? 'auto auto 1fr' : '0fr auto 1fr'}
-	style:transition="grid-template-rows {$motion}ms ease, grid-template-columns {$motion}ms ease"
->
-	<!-- header -->
-	{#if $showDrawer}
-		{#await import('$lib/Drawer/Index.svelte') then Drawer}
-			<svelte:component this={Drawer.default} {view} {data} {toggleDrawer} />
-		{/await}
+{#if mounted}
+	{#if $interfaceMode === 'template'}
+		<TemplateView />
+	{:else}
+		<NativeView />
 	{/if}
-
-	<!-- sidebar -->
-	<div class="sidebar">
-		<!-- time and system info -->
-		<div class="time-section">
-			<div class="time">23:45</div>
-			<div class="date">星期三</div>
-			<div class="date">12月18日</div>
-			<div class="version">Vecka 51</div>
-		</div>
-
-		<!-- weather and stats -->
-		<div class="stats-section">
-			<div class="weather">Weather</div>
-			<div class="cpu">CPU: 0%</div>
-			<div class="ram">RAM: 0%</div>
-		</div>
-
-		<!-- navigation -->
-		{#await import('$lib/Sidebar/Navigation.svelte') then Navigation}
-			<svelte:component this={Navigation.default} />
-		{/await}
-	</div>
-
-	<!-- main content -->
-	<div class="main-content">
-		{#if view?.sections}
-			{#await import('$lib/Main/Index.svelte') then Main}
-				<svelte:component this={Main.default} {view} {altKeyPressed} />
-			{/await}
-		{:else if $connection}
-			{#await import('$lib/Main/Intro.svelte') then Intro}
-				<svelte:component this={Intro.default} {data} />
-			{/await}
-		{/if}
-	</div>
-
-	<!-- right sidebar -->
-	{#await import('$lib/Sidebar/Index.svelte') then Sidebar}
-		<svelte:component this={Sidebar.default} {altKeyPressed} />
-	{/await}
-
-	<!-- menu -->
-	{#if !$disableMenuButton}
-		{#await import('$lib/Drawer/MenuButton.svelte') then MenuButton}
-			<svelte:component this={MenuButton.default} {handleClick} />
-		{/await}
-	{/if}
-
-	<!-- fullscreen button -->
-	{#await import('$lib/Main/FullscreenButton.svelte') then FullscreenButton}
-		<svelte:component this={FullscreenButton.default} />
-	{/await}
-</div>
+{/if}
 
 <style>
-	#layout {
-		display: grid;
-		grid-template-areas:
-			'header header header'
-			'sidebar main aside';
-		grid-template-columns: auto 1fr auto;
-		min-height: 100vh;
-		overflow: hidden;
-	}
-
-	.sidebar {
-		grid-area: sidebar;
-		display: flex;
-		flex-direction: column;
-		background: rgba(0, 0, 0, 0.2);
-		width: 280px;
-	}
-
-	.time-section {
-		padding: 1rem;
-	}
-
-	.time {
-		font-size: 2rem;
-		font-weight: bold;
-	}
-
-	.date, .version {
-		opacity: 0.8;
-	}
-
-	.stats-section {
-		padding: 1rem;
-		border-top: 1px solid rgba(255, 255, 255, 0.1);
-	}
-
-	.main-content {
-		grid-area: main;
-	}
-
-	@media (max-width: 768px) {
-		#layout {
-			grid-template-areas:
-				'header header header'
-				'sidebar sidebar sidebar'
-				'main main main';
-			grid-template-columns: 1fr;
-		}
-
-		.sidebar {
-			width: 100%;
-		}
+	:global(body) {
+		margin: 0;
+		padding: 0;
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	}
 </style>

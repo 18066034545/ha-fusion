@@ -1,49 +1,35 @@
 <!-- 界面切换组件 -->
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { motion } from '$lib/Stores';
+  import { interfaceMode } from '$lib/Stores';
   import Icon from '@iconify/svelte';
-  
-  let isCustomInterface = true;
-  
-  // 从 localStorage 读取界面设置
-  onMount(() => {
-    const savedInterface = localStorage.getItem('ha-fusion-interface');
-    isCustomInterface = savedInterface === null ? true : savedInterface === 'custom';
-  });
-  
-  // 切换界面
+  import { Ripple } from '$lib/Actions';
+  import { ripple } from '$lib/Stores';
+
   function toggleInterface() {
-    isCustomInterface = !isCustomInterface;
-    localStorage.setItem('ha-fusion-interface', isCustomInterface ? 'custom' : 'standard');
-    
-    // 重定向到相应的界面
-    const baseUrl = window.location.href.split(':')[0] + ':' + window.location.href.split(':')[1];
-    const url = isCustomInterface 
-      ? baseUrl + ':5050'
-      : baseUrl + ':8123';
-      
-    window.location.href = url;
+    $interfaceMode = $interfaceMode === 'template' ? 'native' : 'template';
+    // 保存用户偏好
+    localStorage.setItem('ha-fusion-interface', $interfaceMode);
   }
 </script>
 
-<button
-  class="toggle-button"
+<button 
+  class="interface-toggle"
   on:click={toggleInterface}
-  title={isCustomInterface ? "切换到标准界面" : "切换到自定义界面"}
+  title={$interfaceMode === 'template' ? '切换到原生界面' : '切换到模板界面'}
+  use:Ripple={$ripple}
 >
   <Icon 
-    icon={isCustomInterface ? "mdi:view-dashboard" : "mdi:view-dashboard-outline"} 
+    icon={$interfaceMode === 'template' ? 'mdi:view-grid' : 'mdi:view-list'} 
     width="24" 
-    height="24"
+    height="24" 
   />
   <span class="button-text">
-    {isCustomInterface ? "标准界面" : "自定义界面"}
+    {$interfaceMode === 'template' ? '模板视图' : '原生视图'}
   </span>
 </button>
 
 <style>
-  .toggle-button {
+  .interface-toggle {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -54,10 +40,9 @@
     padding: 0.5rem;
     border-radius: 0.25rem;
     transition: all 0.3s ease;
-    width: 100%;
   }
   
-  .toggle-button:hover {
+  .interface-toggle:hover {
     background: rgba(255, 255, 255, 0.1);
   }
   
