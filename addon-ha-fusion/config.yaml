@@ -5,23 +5,39 @@ slug: "ha_fusion"
 description: "一个现代化、易用且高性能的 Home Assistant 自定义仪表盘"
 url: "https://github.com/symi-daguo/addon-ha-fusion"
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
+  - armv7
+
+# disable the docker default system init
 init: false
-map:
-  - share:rw
-startup: application
-boot: auto
+
+# homepage of the add-on
+url: https://github.com/symi-daguo/addon-ha-fusion
+
+# icon for the menu panel integration
+panel_icon: mdi:atom
+
+# allow non-administration users
+panel_admin: false
+
+# security profile
+apparmor: true
+
+# ingress feature for the add-on
 ingress: true
-ingress_port: 8099
-panel_icon: mdi:view-dashboard
+ingress_stream: true
+
+# enable api to get host port
+hassio_api: true
+
+# port to expose, null defaults to disabled
 ports:
   8099/tcp: null
-ports_description:
-  8099/tcp: Web interface
-webui: http://[HOST]:[PORT:8099]
-options: {}
-schema: {}
+
+# map persistent data
+map:
+  - share:rw
+
+startup: application
+boot: auto
