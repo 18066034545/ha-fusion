@@ -1,0 +1,13 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "HA Fusion",
+                "description": "设置您的HA Fusion仪表盘"
+            }
+        },
+        "abort": {
+            "single_instance_allowed": "已配置。仅允许单个配置。"
+        }
+    }
+} 
