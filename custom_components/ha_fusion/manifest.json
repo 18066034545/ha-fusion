@@ -1,0 +1,13 @@
+{
+  "domain": "ha_fusion",
+  "name": "HA Fusion",
+  "documentation": "https://github.com/18066034545/ha-fusion",
+  "issue_tracker": "https://github.com/18066034545/ha-fusion/issues",
+  "dependencies": [],
+  "config_flow": false,
+  "codeowners": ["@18066034545"],
+  "requirements": [],
+  "version": "2024.12.0",
+  "homeassistant": "2024.1.0",
+  "render_readme": true
+} 
