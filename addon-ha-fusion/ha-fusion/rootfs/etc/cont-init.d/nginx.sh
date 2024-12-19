@@ -1,6 +1,3 @@
-<<<<<<< HEAD
- 
-=======
 #!/usr/bin/with-contenv bashio
 declare certfile
 declare keyfile
@@ -18,5 +15,4 @@ if bashio::config.true 'ssl'; then
         | tempio \
             -template /etc/nginx/templates/nginx.ssl.conf \
             -out /etc/nginx/nginx.conf
-fi
->>>>>>> bf35c2285c996817566c3ffe5dddd1cf3da9ea37
+fi 

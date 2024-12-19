@@ -1,6 +1,3 @@
-<<<<<<< HEAD
- 
-=======
 ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
@@ -64,5 +61,4 @@ LABEL \
     org.opencontainers.image.documentation="https://github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
-    org.opencontainers.image.version=${BUILD_VERSION}
->>>>>>> bf35c2285c996817566c3ffe5dddd1cf3da9ea37
+    org.opencontainers.image.version=${BUILD_VERSION} 
