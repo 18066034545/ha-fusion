@@ -1,0 +1,8 @@
+{
+  "name": "HA Fusion",
+  "filename": "ha-fusion.js",
+  "render_readme": true,
+  "content_in_root": true,
+  "homeassistant": "2024.12.0",
+  "category": "frontend"
+}

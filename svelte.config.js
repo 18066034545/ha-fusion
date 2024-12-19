@@ -13,7 +13,7 @@ const config = {
 			precompress: true
 		}),
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/hacsfiles/ha-fusion' : ''
+			base: '/hacsfiles/ha-fusion'
 		}
 	}
 };

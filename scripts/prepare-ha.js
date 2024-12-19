@@ -50,7 +50,20 @@ const manifest = {
     "dependencies": [],
     "codeowners": ["@18066034545"],
     "requirements": [],
-    "version": "2024.12.0"
+    "version": "2024.12.0",
+    "render_readme": true,
+    "homeassistant": "2024.12.0"
 };
 
-fs.writeFileSync(path.join(distDir, 'manifest.json'), JSON.stringify(manifest, null, 2)); 
+// 创建 hacs.json
+const hacs = {
+    "name": "HA Fusion",
+    "filename": "ha-fusion.js",
+    "render_readme": true,
+    "content_in_root": true,
+    "homeassistant": "2024.12.0",
+    "category": "frontend"
+};
+
+fs.writeFileSync(path.join(distDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
+fs.writeFileSync(path.join(distDir, 'hacs.json'), JSON.stringify(hacs, null, 2)); 
