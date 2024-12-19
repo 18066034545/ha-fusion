@@ -10,17 +10,16 @@ WORKDIR /app
 RUN git clone --depth 1 https://github.com/symi-daguo/ha-fusion . && \
     npm install --verbose && \
     npm run build && \
+    ls -la && \
     npm prune --omit=dev && \
-    rm -rf ./data/* && \
-    mkdir -p /app/build && \
-    cp -r /app/dist/* /app/build/
+    rm -rf ./data/*
 
 # second stage
 FROM ${BUILD_FROM}
 WORKDIR /rootfs
 
 # copy files to /rootfs
-COPY --from=builder /app/build ./build
+COPY --from=builder /app/dist ./build
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/server.js .
 COPY --from=builder /app/package.json .
@@ -31,8 +30,7 @@ COPY run.sh /
 # install node, symlink persistent data and chmod run
 RUN apk add --no-cache nodejs-current && \
     ln -s /rootfs/data /data && \
-    chmod a+x /run.sh && \
-    mkdir -p /data
+    chmod a+x /run.sh
 
 # set environment
 ENV PORT=8099 \
