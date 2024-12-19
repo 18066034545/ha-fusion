@@ -6,9 +6,16 @@ import { fastDimension } from 'svelte-fast-dimension';
 const config = {
 	preprocess: [vitePreprocess(), fastDimension()],
 	kit: {
-		adapter: adapter(),
+		adapter: adapter({
+			out: 'build',
+			precompress: true,
+			envPrefix: 'HASS_'
+		}),
 		alias: {
 			$lib: 'src/lib'
+		},
+		paths: {
+			base: process.env.NODE_ENV === 'production' ? '/hacsfiles/ha-fusion' : ''
 		}
 	},
 	typescript: {
@@ -17,7 +24,6 @@ const config = {
 		}
 	},
 	vitePlugin: {
-		// dev inspector
 		inspector: {
 			toggleKeyCombo: 'control-shift',
 			showToggleButton: 'never'

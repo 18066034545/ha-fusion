@@ -17,6 +17,11 @@ import type {
 } from 'home-assistant-js-websocket';
 import { getName } from './Utils';
 
+// interface mode
+export const interfaceMode = writable<'template' | 'native'>(
+	(typeof localStorage !== 'undefined' && localStorage.getItem('ha-fusion-interface') as 'template' | 'native') || 'template'
+);
+
 // hass
 export const connection = writable<Connection>();
 export const config = writable<HassConfig>();

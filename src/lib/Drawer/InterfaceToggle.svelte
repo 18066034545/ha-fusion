@@ -1,9 +1,8 @@
 <!-- 界面切换组件 -->
 <script lang="ts">
-  import { interfaceMode } from '$lib/Stores';
+  import { interfaceMode, ripple } from '$lib/Stores';
   import Icon from '@iconify/svelte';
   import { Ripple } from '$lib/Actions';
-  import { ripple } from '$lib/Stores';
 
   function toggleInterface() {
     $interfaceMode = $interfaceMode === 'template' ? 'native' : 'template';

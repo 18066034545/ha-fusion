@@ -1,23 +1,28 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 dotenv.config();
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
 	plugins: [sveltekit()],
 	build: {
-		// increase chunk size because of maplibre-gl
 		chunkSizeWarningLimit: 1000
 	},
+	resolve: {
+		alias: {
+			$lib: path.resolve(__dirname, './src/lib')
+		}
+	},
 	ssr: {
-		// "cannot use import statement outside a module" because of svelte-ripple
 		noExternal: ['svelte-ripple']
 	},
 	optimizeDeps: {
 		include: [
-			// include all because of dynamic imports, prevents: ✨ optimized dependencies changed. reloading
-			// pnpm ls -P | grep -Ev 'codemirror|@fontsource' | awk '/dependencies:/{flag=1; next} flag{print "\047" $1 "\047,"}'
 			'@jaames/iro',
 			'd3-array',
 			'd3-scale',
@@ -37,7 +42,6 @@ export default defineConfig({
 			'svelte-ripple',
 			'svelte-tiny-virtual-list',
 			'weekstart',
-			// dev deps
 			'@iconify/svelte',
 			'svelte-fast-dimension/action',
 			'@event-calendar/core',
@@ -46,8 +50,6 @@ export default defineConfig({
 			'konva/lib/Shape'
 		],
 		exclude: [
-			// exclude codemirror to avoid state duplication
-			// pnpm ls -P | grep codemirror | awk '{print "\047" $1 "\047,"}'
 			'@codemirror/autocomplete',
 			'@codemirror/commands',
 			'@codemirror/language',
@@ -60,9 +62,7 @@ export default defineConfig({
 		]
 	},
 	server: {
-		// required for webrtc
 		host: true,
-		// development proxy endpoints
 		proxy: {
 			'/local/': {
 				target: process.env.HASS_URL,
