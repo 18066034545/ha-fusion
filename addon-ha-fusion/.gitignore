@@ -1,9 +1,1 @@
-<<<<<<< HEAD
- 
-=======
 .DS_Store
-.vscode/
-node_modules/
-dist/
-*.log
->>>>>>> bf35c2285c996817566c3ffe5dddd1cf3da9ea37

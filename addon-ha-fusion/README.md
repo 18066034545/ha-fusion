@@ -1,43 +1,28 @@
-<<<<<<< HEAD
- 
-=======
-# HA Fusion Add-on
+# HA Fusion
 
-[English](README.md) | [简体中文](README.zh-CN.md)
+一个现代化、易用且高性能的 Home Assistant 自定义仪表盘
 
-Home Assistant 的 HA Fusion 插件，提供现代化、易用且高性能的自定义仪表盘。
+## 安装方式
 
-## 安装
+### 方式一：通过 Home Assistant 插件商店安装
 
-1. 在 Home Assistant 中添加此仓库:
-   ```
-   https://github.com/symi-daguo/addon-ha-fusion
-   ```
-   
-2. 在 Add-on Store 中搜索 "HA Fusion"
+1. 在 Home Assistant 中打开 Supervisor -> Add-on Store
+2. 点击右上角的 ⋮ -> Repositories
+3. 添加仓库地址: `https://github.com/symi-daguo/addon-ha-fusion`
+4. 点击 "Add"
+5. 找到 "HA Fusion" 插件并安装
 
-3. 点击安装
+### 方式二：通过 Docker 安装
 
-## 配置
+```bash
+docker run -d \
+  --name ha-fusion \
+  -p 5050:5050 \
+  -v /path/to/config:/config \
+  ghcr.io/symi-daguo/ha-fusion:latest
+```
 
-插件提供以下配置选项：
+## 链接
 
-| 选项 | 描述 |
-|------|------|
-| ssl | 启用/禁用 SSL |
-| certfile | SSL 证书文件路径 |
-| keyfile | SSL 密钥文件路径 |
-
-## 使用
-
-安装完成后：
-
-1. 启动插件
-2. 打开 Web UI
-3. 开始配置您的仪表盘
-
-## 支持
-
-- 在 GitHub 上提交 [Issue](https://github.com/symi-daguo/addon-ha-fusion/issues)
-- 加入我们的讨论组
->>>>>>> bf35c2285c996817566c3ffe5dddd1cf3da9ea37
+- [GitHub 仓库](https://github.com/symi-daguo/ha-fusion)
+- [问题反馈](https://github.com/symi-daguo/ha-fusion/issues)
