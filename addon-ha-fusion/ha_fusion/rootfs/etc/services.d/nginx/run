@@ -1,0 +1,7 @@
+<<<<<<< HEAD
+ 
+=======
+#!/usr/bin/with-contenv bashio
+bashio::log.info "Starting NGinx..."
+exec nginx
+>>>>>>> bf35c2285c996817566c3ffe5dddd1cf3da9ea37
