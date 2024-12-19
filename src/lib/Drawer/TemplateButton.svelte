@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { openModal } from '$lib/Modal';
+  import { openModal } from 'svelte-modals';
   import Icon from '@iconify/svelte';
   import { Ripple } from '$lib/Actions';
   import { ripple } from '$lib/Stores';

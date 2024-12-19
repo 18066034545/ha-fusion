@@ -1,18 +1,19 @@
 <script lang="ts">
-  import { openModal } from '$lib/Modal';
+  import { openModal } from 'svelte-modals';
   import Icon from '@iconify/svelte';
   import { Ripple } from '$lib/Actions';
   import { ripple } from '$lib/Stores';
 
-  async function openSettings() {
-    const Settings = (await import('$lib/Modal/Settings.svelte')).default;
-    openModal(Settings);
+  export let disabled = false;
+
+  function handleClick() {
+    openModal(() => import('$lib/Modal/Settings.svelte'));
   }
 </script>
 
 <button
   class="settings-button"
-  on:click={openSettings}
+  on:click={handleClick}
   title="设置"
   use:Ripple={$ripple}
 >

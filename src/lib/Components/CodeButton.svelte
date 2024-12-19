@@ -1,18 +1,19 @@
 <script lang="ts">
-  import { openModal } from '$lib/Modal';
+  import { openModal } from 'svelte-modals';
   import Icon from '@iconify/svelte';
   import { Ripple } from '$lib/Actions';
   import { ripple } from '$lib/Stores';
 
-  async function openCodeEditor() {
-    const CodeEditor = (await import('$lib/Modal/CodeEditor.svelte')).default;
-    openModal(CodeEditor);
+  export let disabled = false;
+
+  function handleClick() {
+    openModal(() => import('$lib/Modal/CodeEditor.svelte'));
   }
 </script>
 
 <button
   class="code-button"
-  on:click={openCodeEditor}
+  on:click={handleClick}
   title="编辑代码"
   use:Ripple={$ripple}
 >
