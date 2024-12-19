@@ -1,52 +1,42 @@
+# ha base image
 ARG BUILD_FROM
+
+# first stage, can't use alpine for building armv7
+FROM node:22 AS builder
+WORKDIR /app
+
+### remote
+# clone, build and remove repo example data
+RUN git clone --depth 1 https://github.com/symi-daguo/ha-fusion . && \
+    npm install --verbose && \
+    npm run build && \
+    npm prune --omit=dev && \
+    rm -rf ./data/* && \
+    mkdir -p /app/build && \
+    cp -r /app/dist/* /app/build/
+
+# second stage
 FROM ${BUILD_FROM}
+WORKDIR /rootfs
 
-# Set shell
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+# copy files to /rootfs
+COPY --from=builder /app/build ./build
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/server.js .
+COPY --from=builder /app/package.json .
 
-# Setup base
-ARG BUILD_ARCH
-RUN \
-    apk add --no-cache \
-        nodejs \
-        npm \
-        git
+# copy run
+COPY run.sh /
 
-# Copy root filesystem
-COPY rootfs /
+# install node, symlink persistent data and chmod run
+RUN apk add --no-cache nodejs-current && \
+    ln -s /rootfs/data /data && \
+    chmod a+x /run.sh && \
+    mkdir -p /data
 
-WORKDIR /opt
-RUN git clone --depth=1 https://github.com/symi-daguo/ha-fusion .
+# set environment
+ENV PORT=8099 \
+    NODE_ENV=production \
+    ADDON=true
 
-# Build ha-fusion
-RUN \
-    npm install \
-    && npm run build
-
-# Build arguments
-ARG BUILD_DATE
-ARG BUILD_DESCRIPTION
-ARG BUILD_NAME
-ARG BUILD_REF
-ARG BUILD_REPOSITORY
-ARG BUILD_VERSION
-
-# Labels
-LABEL \
-    io.hass.name="${BUILD_NAME}" \
-    io.hass.description="${BUILD_DESCRIPTION}" \
-    io.hass.arch="${BUILD_ARCH}" \
-    io.hass.type="addon" \
-    io.hass.version=${BUILD_VERSION} \
-    maintainer="symi-daguo" \
-    org.opencontainers.image.title="${BUILD_NAME}" \
-    org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
-    org.opencontainers.image.vendor="Home Assistant Add-ons" \
-    org.opencontainers.image.authors="symi-daguo" \
-    org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://github.com/symi-daguo" \
-    org.opencontainers.image.source="https://github.com/${BUILD_REPOSITORY}" \
-    org.opencontainers.image.documentation="https://github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
-    org.opencontainers.image.created=${BUILD_DATE} \
-    org.opencontainers.image.revision=${BUILD_REF} \
-    org.opencontainers.image.version=${BUILD_VERSION}
+CMD [ "/run.sh" ]

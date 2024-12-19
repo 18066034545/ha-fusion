@@ -4,31 +4,21 @@ version: "2024.12.0"
 slug: "ha_fusion"
 description: "一个现代化、易用且高性能的 Home Assistant 自定义仪表盘"
 url: "https://github.com/symi-daguo/addon-ha-fusion"
-codenotary: "symi-daguo@gmail.com"
 arch:
   - armhf
   - armv7
   - aarch64
   - amd64
   - i386
-startup: application
-boot: auto
-ingress: true
-ingress_port: 5050
-panel_icon: mdi:view-dashboard
 init: false
 map:
   - share:rw
-options:
-  ssl: false
-  certfile: fullchain.pem
-  keyfile: privkey.pem
-schema:
-  ssl: bool
-  certfile: str
-  keyfile: str
+startup: application
+boot: auto
 ports:
-  5050/tcp: 5050
+  8099/tcp: 8099
 ports_description:
-  5050/tcp: Web interface
-webui: http://[HOST]:[PORT:5050]
+  8099/tcp: Web interface
+webui: http://[HOST]:[PORT:8099]
+options: {}
+schema: {}

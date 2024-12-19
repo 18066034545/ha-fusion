@@ -1,8 +1,17 @@
-## What's Changed
-* Fix picture elements add new image by @matt8707 in https://github.com/matt8707/ha-fusion/pull/579
+# Changelog
 
+## 2024.12.0
 
-![pe](https://github.com/user-attachments/assets/aef438e5-f174-47a2-8089-a948126ddd2d)
+- 首次发布
+- 基于 matt8707/ha-fusion 2024.10.1 版本
+- 添加中文支持
+- 修复图片元素编辑器
+- 优化 Docker 构建流程
 
+## 2024.10.1 (上游更新)
 
-**Full Changelog**: https://github.com/matt8707/ha-fusion/compare/2024.10.0...2024.10.1
+### 新功能与改进
+- 修复图片元素添加新图片功能 (@matt8707 in #579)
+
+### 完整变更日志
+- [对比变更](https://github.com/matt8707/ha-fusion/compare/2024.10.0...2024.10.1)
