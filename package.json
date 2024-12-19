@@ -1,11 +1,10 @@
 {
 	"name": "ha-fusion",
-	"version": "2024.10.0",
+	"version": "2024.12.0",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build",
-		"build:ha": "vite build && node scripts/prepare-ha.js",
+		"build": "vite build && node scripts/prepare-ha.js",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -17,7 +16,7 @@
 		"@event-calendar/day-grid": "^3.6.1",
 		"@event-calendar/list": "^3.6.1",
 		"@iconify/svelte": "^4.1.0",
-		"@sveltejs/adapter-node": "^5.2.10",
+		"@sveltejs/adapter-static": "^3.0.0",
 		"@sveltejs/kit": "^2.6.4",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
 		"@types/d3-array": "^3.2.1",

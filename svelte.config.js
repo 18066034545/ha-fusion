@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-node';
+import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { fastDimension } from 'svelte-fast-dimension';
 
@@ -7,26 +7,13 @@ const config = {
 	preprocess: [vitePreprocess(), fastDimension()],
 	kit: {
 		adapter: adapter({
-			out: 'build',
-			precompress: true,
-			envPrefix: 'HASS_'
+			pages: 'dist',
+			assets: 'dist',
+			fallback: 'index.html',
+			precompress: true
 		}),
-		alias: {
-			$lib: 'src/lib'
-		},
 		paths: {
 			base: process.env.NODE_ENV === 'production' ? '/hacsfiles/ha-fusion' : ''
-		}
-	},
-	typescript: {
-		config(config) {
-			config.include.push('../global.d.ts');
-		}
-	},
-	vitePlugin: {
-		inspector: {
-			toggleKeyCombo: 'control-shift',
-			showToggleButton: 'never'
 		}
 	}
 };

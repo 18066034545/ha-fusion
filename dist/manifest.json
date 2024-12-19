@@ -1,9 +1,11 @@
 {
   "domain": "ha_fusion",
   "name": "HA Fusion",
-  "documentation": "https://github.com/your-username/ha-fusion",
+  "documentation": "https://github.com/18066034545/ha-fusion",
   "dependencies": [],
-  "codeowners": [],
+  "codeowners": [
+    "@18066034545"
+  ],
   "requirements": [],
-  "version": "2024.10.0"
+  "version": "2024.12.0"
 }
