@@ -2,12 +2,13 @@
 ARG BUILD_FROM
 
 # first stage, can't use alpine for building armv7
-FROM node:22 AS builder
+FROM registry.cn-hangzhou.aliyuncs.com/library/node:22 AS builder
 WORKDIR /app
 
 ### remote
 # clone, build and remove repo example data
 RUN git clone --depth 1 https://github.com/symi-daguo/ha-fusion . && \
+    npm config set registry https://registry.npmmirror.com && \
     npm install --verbose && \
     npm run build && \
     npm prune --omit=dev && \
@@ -27,7 +28,8 @@ COPY --from=builder /app/package.json .
 COPY run.sh /
 
 # install node, symlink persistent data and chmod run
-RUN apk add --no-cache nodejs-current && \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+    apk add --no-cache nodejs-current && \
     ln -s /rootfs/data /data && \
     chmod a+x /run.sh
 
