@@ -54,11 +54,37 @@
 
 ## 安装说明
 
+### Add-on 安装
+
+1. **添加 Add-on 仓库**
+   - 在 Home Assistant 中打开 "配置" -> "加载项" -> "加载项商店"
+   - 点击右上角的三个点，选择 "仓库"
+   - 添加仓库地址: `https://github.com/symi-daguo/addon-ha-fusion`
+   - 点击 "添加"
+
+2. **安装 Add-on**
+   - 在加载项商店中找到 "HA Fusion"
+   - 点击 "安装"
+   - 等待安装完成
+   - 启动 Add-on
+
+3. **配置**
+   - 在 Add-on 的配置页面中，可以设置以下选项：
+     - `ssl`: 是否启用 SSL
+     - `certfile`: SSL 证书文件路径
+     - `keyfile`: SSL 密钥文件路径
+   - 保存配置并重启 Add-on
+
+4. **访问**
+   - 安装完成后，可以通过以下方式访问:
+     - 直接点击 "打开 Web UI"
+     - 或访问 `http://your-ha-ip:5050`
+
 ### Docker 安装
 
 如果您使用的是 "容器" 或 "核心" 安装方式，可以通过 Docker 安装 ha-fusion：
 
-1. **Docker Compose 文件**：将修改后的 [docker-compose.yml](https://github.com/18066034545/ha-fusion/blob/main/docker-compose.yml) 文件放在合适的目录中。
+1. **Docker Compose 文件**：将修改后的 [docker-compose.yml](https://github.com/symi-daguo/ha-fusion/blob/main/docker-compose.yml) 文件放在合适的目录中。
 
 2. **创建容器**：
    在终端中运行以下命令来启动容器：
@@ -105,14 +131,14 @@ docker-compose up -d ha-fusion
    services:
      ha-fusion:
        container_name: ha-fusion
-       image: ghcr.io/18066034545/ha-fusion
+       image: ghcr.io/symi-daguo/ha-fusion
        ports:
          - "5050:5050"
        volumes:
          - ./data:/app/data
        environment:
          - TZ=Asia/Shanghai
-         - HASS_URL=http://YOUR_HA_IP:8123
+         - HASS_URL=http://192.168.2.12:8123
        restart: always
    ```
    
@@ -157,7 +183,7 @@ docker-compose up -d ha-fusion
    - 如果无法访问界面，检查防火墙是否允许 5050 端口
    - 确保 Docker Desktop 正在运行
    - 检查 Home Assistant 地址是否正确且可访问
-   - 查看容器日志以获取详细错误信息
+   - 查看容器日志以获取��细错误信息
 
 ---
 
@@ -219,7 +245,7 @@ ha-fusion 提供了多个预设的户型模板，帮助您快速配置智能家�
 
 ## 调试
 
-要调试任何错误，如果您使用的是插件，请查看 "日志" 标签页；如果使用 Docker，请使用 `docker logs ha-fusion` 命令。要检查前端问题，请打开浏览器的控制台。
+要调试任何错误，如果您使用的是插件，请查看 "日志" 标页；如果使用 Docker，请使用 `docker logs ha-fusion` 命令。要检查前端问题，请打开浏览器的控制台。
 
 ---
 

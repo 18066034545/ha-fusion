@@ -46,24 +46,13 @@ copyDir(path.join(distDir, '_app/immutable/assets'), path.join(distDir, 'assets'
 const manifest = {
     "domain": "ha_fusion",
     "name": "HA Fusion",
-    "documentation": "https://github.com/18066034545/ha-fusion",
+    "documentation": "https://github.com/symi-daguo/ha-fusion",
     "dependencies": [],
-    "codeowners": ["@18066034545"],
+    "codeowners": ["@symi-daguo"],
     "requirements": [],
     "version": "2024.12.0",
     "render_readme": true,
     "homeassistant": "2024.12.0"
 };
 
-// 创建 hacs.json
-const hacs = {
-    "name": "HA Fusion",
-    "filename": "ha-fusion.js",
-    "render_readme": true,
-    "content_in_root": true,
-    "homeassistant": "2024.12.0",
-    "category": "frontend"
-};
-
-fs.writeFileSync(path.join(distDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
-fs.writeFileSync(path.join(distDir, 'hacs.json'), JSON.stringify(hacs, null, 2)); 
+fs.writeFileSync(path.join(distDir, 'manifest.json'), JSON.stringify(manifest, null, 2)); 

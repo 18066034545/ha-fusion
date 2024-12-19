@@ -1,7 +1,7 @@
 services:
   ha-fusion:
     container_name: ha-fusion
-    image: ghcr.io/18066034545/ha-fusion:latest
+    image: ghcr.io/symi-daguo/ha-fusion:latest
     ports:
       - "5050:5050"
     volumes:

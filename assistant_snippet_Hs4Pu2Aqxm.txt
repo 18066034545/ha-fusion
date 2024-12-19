@@ -1,0 +1,16 @@
+1|# 初始化 git 仓库
+2|cd addon-ha-fusion
+3|git init
+4|
+5|# 添加所有文件
+6|git add .
+7|
+8|# 提交更改
+9|git commit -m "Initial commit: Add HA Fusion Add-on"
+10|
+11|# 添加远程仓库（需要先在 GitHub 上创建仓库）
+12|git remote add origin https://github.com/symi-daguo/addon-ha-fusion.git
+13|
+14|# 推送到 GitHub
+15|git push -u origin main 
+16|mkdir -p addon-ha-fusion/rootfs/etc/nginx/templates

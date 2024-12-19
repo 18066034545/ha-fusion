@@ -2,49 +2,49 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-A modern, easy-to-use and performant custom [Home Assistant](https://www.home-assistant.io/) dashboard, improved based on [matt8707/ha-fusion](https://github.com/matt8707/ha-fusion).
+A modern, user-friendly, and high-performance [Home Assistant](https://www.home-assistant.io/) custom dashboard, improved based on the [matt8707/ha-fusion](https://github.com/matt8707/ha-fusion) project.
 
 <https://www.youtube.com/watch?v=D8mWruSuPOM>
 
-[![preview](/static/preview.png)](https://www.youtube.com/watch?v=D8mWruSuPOM)
+[![Preview](/static/preview.png)](https://www.youtube.com/watch?v=D8mWruSuPOM)
 
-If you find this project useful, be sure to 🌟 this repository!
+If you find this project useful, please give it a 🌟!
 
 ---
 
 ## 📣 Features
 
-This is an improved version of ha-fusion with the following features:
+This is an improved version of the original ha-fusion, with the following additional features:
 
-- Full Chinese language support
+- Complete Chinese language support
 - Enhanced localization features
-- Pre-built house templates
-  - 2 Bedroom 1 Living Room
-  - 3 Bedroom 2 Living Room
-  - Villa Layout
+- Pre-set floor plan templates
+  - Two-bedroom layout
+  - Three-bedroom layout
+  - Villa layout
 - Smart zone management
   - Lighting control
   - Curtain control
   - AC control
-  - Camera system
+  - Surveillance system
   - Music system
   - Scene modes
   - Sensor monitoring
-- Enhanced UI/UX
-  - Fullscreen mode
+- Optimized user interface
+  - Full-screen mode
   - Interface switching
   - Better mobile support
 
-### Recent Optimizations
+### Latest Optimizations
 
 - Improved component architecture
   - Enhanced template selection logic
   - Optimized top navigation layout
   - Better component reusability
-- Performance enhancements
+- Performance improvements
   - Reduced unnecessary re-renders
   - Optimized state management
-  - Improved loading performance
+  - Enhanced loading performance
 - Better type definitions
   - Added TypeScript type checking
   - Enhanced code reliability
@@ -54,11 +54,37 @@ This is an improved version of ha-fusion with the following features:
 
 ## Installation
 
+### Add-on Installation
+
+1. **Add Add-on Repository**
+   - In Home Assistant, go to "Settings" -> "Add-ons" -> "Add-on Store"
+   - Click the three dots in the top right corner, select "Repositories"
+   - Add repository URL: `https://github.com/symi-daguo/addon-ha-fusion`
+   - Click "Add"
+
+2. **Install Add-on**
+   - Find "HA Fusion" in the Add-on Store
+   - Click "Install"
+   - Wait for installation to complete
+   - Start the Add-on
+
+3. **Configuration**
+   - In the Add-on configuration page, you can set the following options:
+     - `ssl`: Enable/disable SSL
+     - `certfile`: SSL certificate file path
+     - `keyfile`: SSL key file path
+   - Save configuration and restart Add-on
+
+4. **Access**
+   - After installation, you can access it by:
+     - Clicking "Open Web UI"
+     - Or visiting `http://your-ha-ip:5050`
+
 ### Docker Installation
 
-For "Container" or "Core" installation methods, ha-fusion can be installed via Docker:
+If you're using the "Container" or "Core" installation method, you can install ha-fusion via Docker:
 
-1. **Docker Compose File**: Place your edited copy of the [docker-compose.yml](https://github.com/18066034545/ha-fusion/blob/main/docker-compose.yml) file in a suitable directory.
+1. **Docker Compose File**: Place the modified [docker-compose.yml](https://github.com/symi-daguo/ha-fusion/blob/main/docker-compose.yml) file in an appropriate directory.
 
 2. **Create Container**:
    Run the following commands in your terminal to start the container:
@@ -70,7 +96,7 @@ For "Container" or "Core" installation methods, ha-fusion can be installed via D
 
 #### Update
 
-To update to the latest version of ha-fusion, run the following commands:
+To update to the latest version of ha-fusion, run:
 
 ```bash
 docker-compose pull ha-fusion
@@ -79,13 +105,14 @@ docker-compose up -d ha-fusion
 
 ---
 
-### Windows 11 Docker Installation Guide
+### Docker Installation on Windows 11
 
 1. **Install Docker Desktop**
-   - Visit [Docker Desktop Website](https://www.docker.com/products/docker-desktop/)
-   - Download Windows version
-   - Install and restart computer
-   - Launch Docker Desktop and wait for it to start
+   - Visit [Docker Desktop website](https://www.docker.com/products/docker-desktop/)
+   - Download Docker Desktop for Windows
+   - Double-click the installer
+   - Restart your computer after installation
+   - Launch Docker Desktop and wait for it to start completely
 
 2. **Create Project Directory**
    ```powershell
@@ -97,36 +124,36 @@ docker-compose up -d ha-fusion
    mkdir data
    ```
 
-3. **Create docker-compose.yml**
-   Create `docker-compose.yml` in `C:\ha-fusion` with:
+3. **Create docker-compose.yml File**
+   Create a `docker-compose.yml` file in `C:\ha-fusion` with the following content:
    ```yaml
    version: '3'
    services:
      ha-fusion:
        container_name: ha-fusion
-       image: ghcr.io/18066034545/ha-fusion
+       image: ghcr.io/symi-daguo/ha-fusion
        ports:
          - "5050:5050"
        volumes:
          - ./data:/app/data
        environment:
          - TZ=Asia/Shanghai
-         - HASS_URL=http://YOUR_HA_IP:8123
+         - HASS_URL=http://192.168.2.12:8123
        restart: always
    ```
    
    > Note:
-   > 1. Replace with your Home Assistant address
-   > 2. Ensure you can access this address
-   > 3. Use `https://` if SSL is enabled
+   > 1. Use your actual Home Assistant address
+   > 2. Ensure your computer can access this address
+   > 3. If your Home Assistant has SSL enabled, use `https://` prefix
 
 4. **Pre-launch Check**
-   Ensure:
+   Before starting the container, ensure:
    - Home Assistant is accessible
    - Docker Desktop is running
-   - Port 5050 is available
+   - Port 5050 is not in use
 
-5. **Launch Container**
+5. **Start Container**
    ```powershell
    cd C:\ha-fusion
    docker-compose up -d
@@ -134,14 +161,14 @@ docker-compose up -d ha-fusion
 
 6. **Verify Installation**
    - Open browser and visit `http://localhost:5050`
-   - You should see the ha-fusion interface
+   - If you see the ha-fusion interface, installation is successful
 
 7. **Common Commands**
    ```powershell
    # Check container status
    docker ps
    
-   # View logs
+   # View container logs
    docker logs ha-fusion
    
    # Stop container
@@ -153,100 +180,100 @@ docker-compose up -d ha-fusion
    ```
 
 8. **Troubleshooting**
-   - Check firewall settings for port 5050
+   - If interface is not accessible, check if firewall allows port 5050
    - Ensure Docker Desktop is running
-   - Verify Home Assistant address
-   - Check container logs for details
+   - Verify Home Assistant address is correct and accessible
+   - Check container logs for detailed error information
 
 ---
 
 ## Usage Guide
 
-### House Templates
+### Floor Plan Templates
 
-ha-fusion provides multiple pre-built house templates to help you quickly configure your smart home:
+ha-fusion provides multiple pre-set floor plan templates to help you quickly configure your smart home space:
 
-1. **2 Bedroom 1 Living Room**
+1. **Two-bedroom Layout**
    - Suitable for small families
-   - Basic rooms and functions
-   - Essential smart controls
+   - Includes basic rooms and functions
+   - Basic smart control features
 
-2. **3 Bedroom 2 Living Room**
-   - Suitable for medium families
-   - Additional study room
-   - Complete smart control system
+2. **Three-bedroom Layout**
+   - Suitable for medium-sized families
+   - Additional study room space
+   - More complete smart control system
 
 3. **Villa Layout**
    - Suitable for large homes
-   - Entertainment and function rooms
-   - Comprehensive smart home solution
+   - Includes media room, gym, and other functional spaces
+   - Complete smart home solution
 
-Each room comes with:
+Each room comes with the following pre-set function areas:
 - Lighting control
 - Curtain control
 - AC control
-- Camera system (optional)
+- Surveillance system (optional)
 - Music system (optional)
 - Scene modes
 - Sensor monitoring
 
 ### URL Parameters
 
-These features only work when exposing a port in the configuration or using Docker. Note that query strings cannot be read when using Ingress.
+These features are only effective when ports are exposed in configuration or when using Docker. Note: URL parameters cannot be read when using Ingress.
 
-#### View
+#### Views
 
-To set a particular view when the page loads, add the "view" parameter. For example, if you have a "Bedroom" view, append the query string `?view=Bedroom` to the URL.
+To set a specific view on page load, add the "view" parameter. For example, if you have a "Bedroom" view, add the query string `?view=Bedroom` to the URL.
 
 #### Menu
 
-To disable the menu button, append the query string `?menu=false` to the URL. This is useful for wall-mounted tablets.
+To disable the menu button, add the query string `?menu=false` to the URL. This is particularly useful for wall-mounted tablets.
 
 ---
 
 ## Keyboard Shortcuts
 
 | Key                 | Description |
-| ------------------- | ----------- |
-| **f**               | filter      |
-| **esc**             | exit        |
-| **cmd + s**         | save        |
-| **cmd + z**         | undo        |
-| **cmd + shift + z** | redo        |
+| ------------------ | ----------- |
+| **f**              | Filter      |
+| **esc**            | Exit        |
+| **cmd + s**        | Save        |
+| **cmd + z**        | Undo        |
+| **cmd + shift + z**| Redo        |
 
 ---
 
-## Debug
+## Debugging
 
-To debug any errors, check the "Log" tab if you're using the addon, or use `docker logs ha-fusion` for Docker setups. To inspect frontend issues, open the browser's console.
+To debug any errors, check the "Logs" tab if you're using the add-on, or use `docker logs ha-fusion` if using Docker. To check frontend issues, open your browser's console.
 
 ---
 
 ## Development
 
-To begin contributing to the project, you'll first need to install node. It's also recommended to install pnpm. If you're unfamiliar with Svelte, consider doing the tutorial at <https://learn.svelte.dev>
+To start contributing to the project, you'll need to have node installed. Installing pnpm is also recommended. If you're not familiar with Svelte, it's recommended to complete the tutorial at <https://learn.svelte.dev>.
 
 ```bash
-# prerequisites (macos)
+# Prerequisites (macos)
 brew install node pnpm
 
-# install
-git clone https://github.com/18066034545/ha-fusion.git
+# Installation
+git clone https://github.com/symi-daguo/ha-fusion.git
 cd ha-fusion
 pnpm install
 
-# environment
+# Environment setup
 cp .env.example .env
 code .env
 
-# server
+# Server
 npm run dev -- --open
 
-# dependencies
+# Dependencies
 pnpm outdated
 pnpm update
 
-# lint
+# Code checks
 npm run check
 npm run lint
 npm run format
