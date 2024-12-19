@@ -35,6 +35,21 @@ This is an improved version of ha-fusion with the following features:
   - Interface switching
   - Better mobile support
 
+### Recent Optimizations
+
+- Improved component architecture
+  - Enhanced template selection logic
+  - Optimized top navigation layout
+  - Better component reusability
+- Performance enhancements
+  - Reduced unnecessary re-renders
+  - Optimized state management
+  - Improved loading performance
+- Better type definitions
+  - Added TypeScript type checking
+  - Enhanced code reliability
+  - Improved development experience
+
 ---
 
 ## Installation
